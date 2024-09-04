@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: money-tracker-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: money-tracker
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "root"]
+      timeout: 30s
+      retries: 15
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - money-tracker-network
+
+  backend:
+    build:
+      context: ./money-tracker-back
+      dockerfile: Dockerfile
+    container_name: money-tracker-backend
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://money-tracker-postgres:5432/money-tracker
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      timeout: 30s
+      retries: 15
+    networks:
+      - money-tracker-network
+
+  frontend:
+    build:
+      context: ./money-tracker-front
+      dockerfile: Dockerfile
+    container_name: money-tracker-frontend
+    restart: always
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "4200:80"
+    networks:
+      - money-tracker-network
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  money-tracker-network:
+    driver: bridge

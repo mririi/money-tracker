@@ -1,0 +1,25 @@
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-table {
+  margin: 1rem 2rem;
+}
+
+.revenu-card .custom-card{
+  background: lightgreen;
+  color: white;
+}
+
+.expense-card .custom-card{
+  background: lightcoral;
+  color: white;
+}
+
+.button-add {
+  font-weight: bold;
+  float: right;
+  margin-right: 2rem;
+}

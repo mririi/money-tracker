@@ -1,0 +1,37 @@
+<div style="padding: 0 70px">
+  <div class="line">
+    <div>
+      <input
+        pInputText
+        id="name"
+        placeholder="Name"
+        [(ngModel)]="transaction.name"/>
+    </div>
+    <div>
+      <input
+        pInputText
+        id="amount"
+        placeholder="Amount"
+        [(ngModel)]="transaction.amount"/>
+    </div>
+  </div>
+  <div class="line">
+    <div>
+      <input
+        pInputText
+        id="category"
+        placeholder="Category"
+        [(ngModel)]="transaction.category"/>
+    </div>
+    <div>
+      <p-dropdown
+        [options]="transactionTypes"
+        [(ngModel)]="transaction.type"
+        optionLabel="name"
+        placeholder="Select a type"/>
+    </div>
+  </div>
+  <div style="margin-top: 20px; display: flex;justify-content: center">
+    <p-button label="Save" (click)="onSave()"/>
+  </div>
+</div>

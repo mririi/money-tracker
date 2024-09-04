@@ -1,0 +1,34 @@
+<div class="card-container">
+  <app-custom-card header="Budget" [content]="balance"></app-custom-card>
+  <app-custom-card header="Revenu" [content]="revenuTotal" class="revenu-card"></app-custom-card>
+  <app-custom-card header="Expense" [content]="expenseTotal" class="expense-card"></app-custom-card>
+</div>
+<div style="display: flex;flex-direction: column">
+  <app-custom-dialog></app-custom-dialog>
+  <p-table
+    styleClass="custom-table"
+    [value]="transactions"
+    [paginator]="true"
+    [rows]="5"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [rowsPerPageOptions]="[5, 10, 20]"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:25%">Name</th>
+        <th style="width:25%">Amount</th>
+        <th style="width:25%">Category</th>
+        <th style="width:25%">Type</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-transaction>
+      <tr>
+        <td>{{ transaction.name }}</td>
+        <td>{{ transaction.amount }}</td>
+        <td>{{ transaction.category }}</td>
+        <td><p-tag [value]="transaction.type" [severity]="getSeverity(transaction.type)" /></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+

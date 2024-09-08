@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home.component";
 import {MoneyTrackOverviewComponent} from "./money-track-overview/money-track-overview.component";
+import {AddTransactionComponent} from "./add-transaction/add-transaction.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
+  {
+    path: 'add-transaction',
+    component: AddTransactionComponent,
+  }
 
 ];
 

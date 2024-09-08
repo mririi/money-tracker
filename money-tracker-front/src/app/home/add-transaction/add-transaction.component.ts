@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {TransactionApiService} from "../../core/apis/transaction.api.service";
-import {DynamicDialogRef} from "primeng/dynamicdialog";
 import {TransactionService} from "../../core/services/transaction.service";
-import {TransactionGetDto} from "../../core/dtos/transaction/TransactionGetDto";
-import {TransactionPostDto} from "../../core/dtos/transaction/TransactionPostDto";
+import {TransactionGetDto} from "../../core/dtos/transaction/transactionGetDto";
+import {TransactionPostDto} from "../../core/dtos/transaction/transactionPostDto";
+import {TransactionTypeEnum} from "../../core/enums/transactionTypeEnum";
 
 @Component({
   selector: 'app-add-transaction',
@@ -12,19 +12,19 @@ import {TransactionPostDto} from "../../core/dtos/transaction/TransactionPostDto
 })
 export class AddTransactionComponent {
   transaction: any = {};
-  transactionTypes: any[] | undefined = [
-    {name: 'EXPENSE'},
-    {name: 'INCOME'}
+  transactionTypes: { name: TransactionTypeEnum }[] = [
+    {name: TransactionTypeEnum.EXPENSE},
+    {name: TransactionTypeEnum.INCOME},
+    {name: TransactionTypeEnum.SAVINGS}
   ];
 
   constructor(private readonly transactionApiService: TransactionApiService,
-              private transactionService: TransactionService,
-              private readonly ref: DynamicDialogRef ) {}
+              private transactionService: TransactionService) {}
 
   onSave() {
     const postTransaction: TransactionPostDto = {
       amount: this.transaction.amount,
-      name: this.transaction.name,
+      date: this.transaction.date,
       category: this.transaction.category,
       type: this.transaction.type.name
     }
@@ -41,6 +41,6 @@ export class AddTransactionComponent {
   }
 
   onClose() {
-    this.ref.close();
+    // this.ref.close();
   }
 }

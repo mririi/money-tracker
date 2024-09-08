@@ -6,9 +6,12 @@ import { AppComponent } from './app.component';
 import {HomeModule} from "./home/home.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
-import {ProfilApiService} from "./core/apis/profil.api.service";
+import {ProfileApiService} from "./core/apis/profile.api.service";
 import {TransactionApiService} from "./core/apis/transaction.api.service";
 import {TransactionService} from "./core/services/transaction.service";
+import {ProfileService} from "./core/services/profile.service";
+import {AuthModule} from "./auth/auth.module";
+import {AuthService} from "./core/services/auth.service";
 
 @NgModule({
   declarations: [
@@ -18,13 +21,16 @@ import {TransactionService} from "./core/services/transaction.service";
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    AuthModule,
     HomeModule,
     HttpClientModule,
   ],
   providers: [
-    ProfilApiService,
+    ProfileApiService,
     TransactionApiService,
-    TransactionService
+    TransactionService,
+    ProfileService,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

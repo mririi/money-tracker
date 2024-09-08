@@ -1,34 +1,13 @@
-<div class="card-container">
-  <app-custom-card header="Budget" [content]="balance"></app-custom-card>
-  <app-custom-card header="Revenu" [content]="revenuTotal" class="revenu-card"></app-custom-card>
-  <app-custom-card header="Expense" [content]="expenseTotal" class="expense-card"></app-custom-card>
+<div class="px-2 py-3">
+  <div class="row">
+    <app-custom-card header="Balance" [content]="balance" class="balance-card col-3"></app-custom-card>
+    <app-custom-card header="Revenu" [content]="revenuTotal" class="revenu-card col-3"></app-custom-card>
+    <app-custom-card header="Expense" [content]="expenseTotal" class="expense-card col-3"></app-custom-card>
+    <app-custom-card header="Savings" [content]="savingsTotal" class="savings-card col-3"></app-custom-card>
+  </div>
 </div>
-<div style="display: flex;flex-direction: column">
-  <app-custom-dialog></app-custom-dialog>
-  <p-table
-    styleClass="custom-table"
-    [value]="transactions"
-    [paginator]="true"
-    [rows]="5"
-    [tableStyle]="{ 'min-width': '50rem' }"
-    [rowsPerPageOptions]="[5, 10, 20]"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th style="width:25%">Name</th>
-        <th style="width:25%">Amount</th>
-        <th style="width:25%">Category</th>
-        <th style="width:25%">Type</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-transaction>
-      <tr>
-        <td>{{ transaction.name }}</td>
-        <td>{{ transaction.amount }}</td>
-        <td>{{ transaction.category }}</td>
-        <td><p-tag [value]="transaction.type" [severity]="getSeverity(transaction.type)" /></td>
-      </tr>
-    </ng-template>
-  </p-table>
+<div style="position:relative;display: flex;flex-direction: column">
+  <i class="fas fa-plus add-transaction-button btn" (click)="onOpenAddTransaction()"></i>
+  <app-custom-table style="margin-top: 70px" [transactions]="transactions"></app-custom-table>
 </div>
 

@@ -1,5 +1,6 @@
 package com.moneyTracker.services;
 
+import com.moneyTracker.dtos.ProfileTokenPostDto;
 import com.moneyTracker.entities.ProfileEntity;
 import com.moneyTracker.repositories.ProfileJpaRepository;
 import com.moneyTracker.token.TokenRepository;
@@ -20,8 +21,8 @@ public class ProfileService {
         return profileJpaRepository.findById(id).orElse(null);
     }
 
-    public ProfileEntity getProfileByUserToken(String token) {
-        Optional<User> user = userRepository.findUserByTokensToken(token);
+    public ProfileEntity getProfileByUserToken(ProfileTokenPostDto profileTokenPostDto) {
+        Optional<User> user = userRepository.findUserByTokensToken(profileTokenPostDto.getToken());
         if(user.isEmpty()) {
             return null;
         }

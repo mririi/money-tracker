@@ -1,6 +1,6 @@
 import {Directive} from "@angular/core";
 import {BehaviorSubject, Subject} from "rxjs";
-import {TransactionGetDto} from "../dtos/transaction/TransactionGetDto";
+import {TransactionGetDto} from "../dtos/transaction/transactionGetDto";
 
 @Directive()
 export class TransactionService {

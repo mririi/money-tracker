@@ -1,25 +1,64 @@
-.card-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .custom-table {
   margin: 1rem 2rem;
 }
 
+.balance-card .custom-card{
+  border: 2px solid var(--secondary-color);
+  color: var(--white);
+}
+
+.balance-card .custom-card:hover{
+  background: var(--secondary-color);
+  color: #121313;
+  cursor: pointer;
+}
+
 .revenu-card .custom-card{
+  border: 2px solid lightgreen;
+  color: var(--white);
+}
+
+.revenu-card .custom-card:hover{
   background: lightgreen;
-  color: white;
+  color: var(--black);
+  cursor: pointer;
 }
 
 .expense-card .custom-card{
-  background: lightcoral;
-  color: white;
+  border: 2px solid lightcoral;
+  color: var(--white);
 }
 
-.button-add {
+.expense-card .custom-card:hover{
+  background: lightcoral;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.savings-card .custom-card{
+  border: 2px solid lightblue;
+  color: var(--white);
+}
+
+.savings-card .custom-card:hover{
+  background: lightblue;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.add-transaction-button {
+  background: var(--primary-color);
+  width: 50px;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  font-size: 1.4rem;
   font-weight: bold;
-  float: right;
-  margin-right: 2rem;
+  position: absolute;
+  right: 45px;
+}
+
+.add-transaction-button:hover {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }

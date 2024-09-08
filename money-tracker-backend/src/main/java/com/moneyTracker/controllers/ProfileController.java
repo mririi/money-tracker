@@ -1,5 +1,6 @@
 package com.moneyTracker.controllers;
 
+import com.moneyTracker.dtos.ProfileTokenPostDto;
 import com.moneyTracker.entities.ProfileEntity;
 import com.moneyTracker.services.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +13,9 @@ public class ProfileController {
 
     private final ProfileService profileService;
 
-    @GetMapping("/profile")
-    public ProfileEntity getProfilByUserToken(@RequestParam("token") final String token) {
-        return profileService.getProfileByUserToken(token);
+    @PostMapping("/profile")
+    public ProfileEntity getProfileByUserToken(@RequestBody final ProfileTokenPostDto profileTokenPostDto) {
+        return profileService.getProfileByUserToken(profileTokenPostDto);
     }
 
     @PutMapping("/{id}/balance")

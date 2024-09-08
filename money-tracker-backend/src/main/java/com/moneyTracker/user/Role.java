@@ -32,7 +32,8 @@ public enum Role {
                   Permission.MANAGER_DELETE,
                   Permission.MANAGER_CREATE
           )
-  )
+  ),
+    GUEST(Collections.emptySet())
 
   ;
 

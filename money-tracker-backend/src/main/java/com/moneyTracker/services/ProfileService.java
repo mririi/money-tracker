@@ -1,0 +1,58 @@
+package com.moneyTracker.services;
+
+import com.moneyTracker.entities.ProfileEntity;
+import com.moneyTracker.repositories.ProfileJpaRepository;
+import com.moneyTracker.token.TokenRepository;
+import com.moneyTracker.user.User;
+import com.moneyTracker.user.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class ProfileService {
+    private final ProfileJpaRepository profileJpaRepository;
+    private final UserRepository userRepository;
+    private final TokenRepository tokenRepository;
+
+    public ProfileEntity getProfileById(int id) {
+        return profileJpaRepository.findById(id).orElse(null);
+    }
+
+    public ProfileEntity getProfileByUserToken(String token) {
+        Optional<User> user = userRepository.findUserByTokensToken(token);
+        if(user.isEmpty()) {
+            return null;
+        }
+        Optional<ProfileEntity> profile = profileJpaRepository.findByUser(user.get());
+        return profile.orElse(null);
+    }
+
+    public void createProfile(int userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()) {
+            return;
+        }
+        User u = user.get();
+        ProfileEntity profile = ProfileEntity.builder()
+                .balance(0L)
+                .user(u)
+                .build();
+        profileJpaRepository.save(profile);
+    }
+
+    public void updateProfileBalance(int profileId, Long balance) {
+        Optional<ProfileEntity> p = profileJpaRepository.findById(profileId);
+        if(p.isEmpty()) {
+            return;
+        }
+        ProfileEntity profile = p.get();
+        profile.setBalance(balance);
+        profileJpaRepository.save(profile);
+    }
+
+    public void deleteProfil(int id) {
+        profileJpaRepository.deleteById(id);
+    }
+}

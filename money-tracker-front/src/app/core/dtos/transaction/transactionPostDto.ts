@@ -3,4 +3,5 @@ export interface TransactionPostDto {
     amount: number;
     date: string;
     type: string;
+    profileId: number
 }

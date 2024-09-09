@@ -1,35 +1,33 @@
-
-<div style="padding: 0 70px">
-  <div class="line">
+<div class="add-container">
+  <div class="header">
     <div>
-      <div>
-        <input
-          id="category"
-          placeholder="Category"
-          [(ngModel)]="transaction.category"/>
-      </div>
+      <h3 class="title">Add Transaction</h3>
     </div>
     <div>
-      <input
-        id="amount"
-        placeholder="Amount"
-        [(ngModel)]="transaction.amount"/>
+      <button class="btn saveButton" (click)="onSave()">Save</button>
+      <button class="btn btn-outline-danger closeButton" (click)="onClose()">Close</button>
     </div>
   </div>
-  <div class="line">
-    <input
-      id="date"
-      placeholder="Date"
-      [(ngModel)]="transaction.date"/>
-    <div>
-      <select id="type" name="type" [(ngModel)]="transaction.type">
+  <div class="body">
+    <div class="form-group">
+      <label for="category">Category</label>
+      <input type="text" class="form-control customInput" id="category" [(ngModel)]="transaction.category">
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input type="number" class="form-control customInput" id="amount" [(ngModel)]="transaction.amount">
+    </div>
+    <div class="form-group">
+      <label for="date">Description</label>
+      <input type="datetime-local" class="form-control customInput" id="date" [(ngModel)]="transaction.date">
+    </div>
+    <div class="form-group">
+      <label for="transactionType">Transaction Type</label>
+      <select class="form-control customInput" id="transactionType" [(ngModel)]="transaction.type">
         <ng-container *ngFor="let type of transactionTypes">
-          <option [value]="type">{{ type.name }}</option>
+          <option [value]="type.name">{{ type.name }}</option>
         </ng-container>
       </select>
     </div>
-  </div>
-  <div style="margin-top: 20px; display: flex;justify-content: center">
-    <button title="Save" (click)="onSave()"></button>
   </div>
 </div>

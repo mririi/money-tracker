@@ -6,7 +6,6 @@ import {TransactionService} from "../../core/services/transaction.service";
 import {ProfileService} from "../../core/services/profile.service";
 import {ProfileGetDto} from "../../core/dtos/profil/profileGetDto";
 import {ProfileTokenPostDto} from "../../core/dtos/profil/profileTokenPostDto";
-import {TransactionTypeEnum} from "../../core/enums/transactionTypeEnum";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -41,6 +40,7 @@ export class MoneyTrackOverviewComponent implements OnInit {
         this.profileId = profile.id;
         this.balance = profile.balance + '';
         this.loadTransactions();
+        this.loadInfo();
       },
       error: error => console.error("error" + error.message)
     });
@@ -72,5 +72,26 @@ export class MoneyTrackOverviewComponent implements OnInit {
 
   onOpenAddTransaction() {
     this.router.navigate(['add-transaction'], {relativeTo: this.route});
+  }
+
+  private loadInfo() {
+    this.transactionApiService.getRevenuTotal(this.profileId).subscribe({
+      next: revenuTotal => {
+        this.revenuTotal = revenuTotal + '';
+      },
+      error: error => console.error("error" + error.message)
+    });
+    this.transactionApiService.getExpenseTotal(this.profileId).subscribe({
+      next: expenseTotal => {
+        this.expenseTotal = expenseTotal + '';
+      },
+      error: error => console.error("error" + error.message)
+    });
+    this.transactionApiService.getSavingsTotal(this.profileId).subscribe({
+      next: savingsTotal => {
+        this.savingsTotal = savingsTotal + '';
+      },
+      error: error => console.error("error" + error.message)
+    });
   }
 }

@@ -1,20 +1,30 @@
 <div class="px-5">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Type</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let transaction of transactions">
-        <td>{{ transaction.category }}</td>
-        <td>{{ transaction.amount }}</td>
-        <td>{{ transaction.date | date:'short' }}</td>
-        <td>{{ transaction.type }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row header">
+    <div class="col-3 header-item">
+      <p>Category</p>
+    </div>
+    <div class="col-3 header-item">
+      <p>Amount</p>
+    </div>
+    <div class="col-3 header-item">
+      <p>Date</p>
+    </div>
+    <div class="col-3 text-center">
+      <p>Type</p>
+    </div>
+  </div>
+  <div class="row line" *ngFor="let transaction of transactions">
+    <div class="col-3 line-item">
+      <p>{{ transaction.category }}</p>
+    </div>
+    <div class="col-3 line-item">
+      <p>{{ transaction.amount }}</p>
+    </div>
+    <div class="col-3 line-item">
+      <p>{{ transaction.date | date:'short' }}</p>
+    </div>
+    <div class="col-3 text-center">
+      <p>{{ transaction.type }}</p>
+    </div>
+  </div>
 </div>

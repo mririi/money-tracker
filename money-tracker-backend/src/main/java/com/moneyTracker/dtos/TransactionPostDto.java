@@ -1,5 +1,6 @@
 package com.moneyTracker.dtos;
 
+import com.moneyTracker.enums.TransactionTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransactionPostDto {
-    private Long amount;
+    private Double amount;
     private String category;
-    private String type;
+    private TransactionTypeEnum type;
     private String date;
+    private String commentaire;
     private int profileId;
 }

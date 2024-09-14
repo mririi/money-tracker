@@ -3,10 +3,12 @@ package com.moneyTracker.services;
 import com.moneyTracker.dtos.TransactionPostDto;
 import com.moneyTracker.entities.ProfileEntity;
 import com.moneyTracker.entities.TransactionEntity;
+import com.moneyTracker.enums.TransactionTypeEnum;
 import com.moneyTracker.repositories.TransactionJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +24,7 @@ public class TransactionService {
                 .amount(transactionPostDto.getAmount())
                 .category(transactionPostDto.getCategory())
                 .type(transactionPostDto.getType())
-                .date(LocalDateTime.parse(transactionPostDto.getDate()))
+                .date(LocalDate.parse(transactionPostDto.getDate()))
                 .profileEntity(profileEntity).build();
         return transactionJpaRepository.save(transactionEntity);
     }
@@ -39,9 +41,9 @@ public class TransactionService {
         return new HashSet<>(transactionJpaRepository.findByProfileEntityId(profileId));
     }
 
-    public long getTotalAmount(int id, String type) {
-        Long totalAmount = transactionJpaRepository.sumAmountByProfileEntityIdAndType(id, type);
-        return totalAmount != null ? totalAmount : 0L ;
+    public Double getTotalAmount(int id, TransactionTypeEnum type) {
+        Double totalAmount = transactionJpaRepository.sumAmountByProfileEntityIdAndType(id, type);
+        return totalAmount != null ? totalAmount : 0.0 ;
     }
 
 }

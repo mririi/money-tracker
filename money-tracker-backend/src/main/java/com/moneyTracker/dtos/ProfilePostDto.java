@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfilePostDto {
-    private double balance;
-    private double totalIncome;
-    private double totalExpense;
-    private double totalSavings;
+    private Double balance;
     private int userId;
 }

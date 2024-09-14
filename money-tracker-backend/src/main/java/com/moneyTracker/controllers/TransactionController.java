@@ -2,6 +2,7 @@ package com.moneyTracker.controllers;
 
 import com.moneyTracker.dtos.TransactionPostDto;
 import com.moneyTracker.entities.TransactionEntity;
+import com.moneyTracker.enums.TransactionTypeEnum;
 import com.moneyTracker.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class TransactionController {
     }
 
     @GetMapping("/profile/{id}/total-amount")
-    public long getTotalAmount(@PathVariable("id") final int id, @RequestParam("type") final String type) {
+    public Double getTotalAmount(@PathVariable("id") final int id, @RequestParam("type") final TransactionTypeEnum type) {
         return transactionService.getTotalAmount(id, type);
     }
 

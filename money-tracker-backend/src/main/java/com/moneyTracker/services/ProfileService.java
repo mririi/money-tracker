@@ -37,13 +37,13 @@ public class ProfileService {
         }
         User u = user.get();
         ProfileEntity profile = ProfileEntity.builder()
-                .balance(0L)
+                .balance(0.0)
                 .user(u)
                 .build();
         profileJpaRepository.save(profile);
     }
 
-    public void updateProfileBalance(int profileId, Long balance) {
+    public void updateProfileBalance(int profileId, Double balance) {
         Optional<ProfileEntity> p = profileJpaRepository.findById(profileId);
         if(p.isEmpty()) {
             return;

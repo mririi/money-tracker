@@ -6,9 +6,10 @@ import {TransactionService} from "../../core/services/transaction.service";
 import {ProfileService} from "../../core/services/profile.service";
 import {ProfileGetDto} from "../../core/dtos/profil/profileGetDto";
 import {ProfileTokenPostDto} from "../../core/dtos/profil/profileTokenPostDto";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import {TransactionTypeEnum} from "../../core/enums/transactionTypeEnum";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-money-track-overview',
@@ -29,10 +30,10 @@ export class MoneyTrackOverviewComponent implements OnInit {
   dateStartPeriod: string = '';
   dateEndPeriod: string = ''
   isShowPeriod: boolean = false;
+  balanceToUpdate: number = 0;
 
   constructor(private readonly transactionApiService: TransactionApiService,
               private readonly router: Router,
-              private readonly route: ActivatedRoute,
               public transactionService: TransactionService,
               private readonly profileApiService: ProfileApiService,
               config: NgbModalConfig,
@@ -43,6 +44,14 @@ export class MoneyTrackOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadProfile();
+    this.transactionService.transactions.subscribe(transactions => {
+      this.transactions = transactions;
+      this.filteredData = transactions;
+    });
+  }
+
+  loadProfile() {
     const profileTokenPostDto: ProfileTokenPostDto = {
       token: localStorage.getItem('access_token') || '',
     }
@@ -56,12 +65,7 @@ export class MoneyTrackOverviewComponent implements OnInit {
       },
       error: error => console.error("error" + error.message)
     });
-    this.transactionService.transactions.subscribe(transactions => {
-      this.transactions = transactions;
-      this.filteredData = transactions;
-    });
   }
-
   loadTransactions() {
     this.transactionApiService.getTransactions(this.profileId).subscribe({
       next: transactions => {
@@ -149,8 +153,20 @@ export class MoneyTrackOverviewComponent implements OnInit {
   }
 
   onChangeType(event: any) {
-    if (event.target.value === 'period') {
-      this.isShowPeriod = true;
-    }
+    this.isShowPeriod = event.target.value === 'period';
+  }
+
+  onUpdateBalance(content: any) {
+    this.modalService.open(content);
+  }
+
+  onUpdateBalanceSubmit() {
+    this.profileApiService.updateBalance(this.profileId, +this.balanceToUpdate).subscribe({
+      next: () => {
+        this.loadProfile();
+        this.onCloseModal();
+      },
+      error: error => console.error("error" + error.message)
+    });
   }
 }

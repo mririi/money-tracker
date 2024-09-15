@@ -1,1 +1,26 @@
-<p>register works!</p>
+<div class="container-auth">
+  <div class="left"><img src="assets/auth.png" alt="Description of Image" class="image"></div>
+  <div class="right">
+    <div>
+      <h2>Register to</h2>
+      <h1>Money Tracker</h1>
+      <div class="mt-4">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control mt-1 customInput" [(ngModel)]="authPostDto.email" />
+      </div>
+      <div class="mt-2">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control mt-1 customInput" [(ngModel)]="authPostDto.password" />
+      </div>
+      <div class="mt-2">
+        <label for="passwordConfirmation">Password</label>
+        <input type="password" id="passwordConfirmation" class="form-control mt-1 customInput" [(ngModel)]="passwordConfirmation" />
+      </div>
+      <div class="mt-4 mb-2">
+        <button class="btn button" [class.disabled]="disabled" (click)="register()">Register</button>
+      </div>
+      <a class="link" (click)="onGoToLogin()">Login?</a>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>

@@ -59,6 +59,11 @@
   border-color: var(--secondary-color);
 }
 
+.link {
+  color: var(--white);
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .left {
     display: none;

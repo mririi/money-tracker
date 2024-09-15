@@ -38,4 +38,8 @@ export class TransactionApiService {
     const httpParams = new HttpParams().set('type', 'SAVINGS');
     return this.http.get<number>(`${environment.apiUrl}transactions/profile/${profileId}/total-amount`, { params: httpParams });
   }
+
+  deleteTransaction(transactionId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}transactions/${transactionId.toString()}`);
+  }
 }

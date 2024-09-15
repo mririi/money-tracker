@@ -1,4 +1,5 @@
 <div class="pb-5 custom-table">
+  <p class="mr-5" style="font-size: 12px">* Click on a transaction to delete it</p>
   <div class="row header">
     <div class="col-3 header-item">
       <p>Category</p>
@@ -16,21 +17,23 @@
       <p>Comment</p>
     </div>
   </div>
-  <div class="row line" *ngFor="let transaction of transactions">
-    <div class="col-3 line-item">
-      <p>{{ transaction.category }}</p>
+  <ng-container *ngFor="let transaction of transactions">
+    <div class="row line" (click)="onDeleteTransaction(transaction.id)">
+      <div class="col-3 line-item">
+        <p>{{ transaction.category }}</p>
+      </div>
+      <div class="col-2 line-item">
+        <p>{{ transaction.amount }}</p>
+      </div>
+      <div class="col-2 line-item">
+        <p>{{ transaction.date | date:'dd-MM-YY' }}</p>
+      </div>
+      <div class="col-2 line-item type-container">
+        <p [class]="getTypeColorClass(transaction.type)">{{ transaction.type }}</p>
+      </div>
+      <div class="col-3">
+        <p>{{ transaction.comment }}</p>
+      </div>
     </div>
-    <div class="col-2 line-item">
-      <p>{{ transaction.amount }}</p>
-    </div>
-    <div class="col-2 line-item">
-      <p>{{ transaction.date | date:'dd-MM-YY' }}</p>
-    </div>
-    <div class="col-2 line-item type-container">
-      <p [class]="getTypeColorClass(transaction.type)">{{ transaction.type }}</p>
-    </div>
-    <div class="col-3">
-      <p>{{ transaction.comment }}</p>
-    </div>
-  </div>
+  </ng-container>
 </div>

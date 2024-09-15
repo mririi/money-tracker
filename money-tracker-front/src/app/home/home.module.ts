@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from "./home.component";
 import {NavbarComponent} from './navbar/navbar.component';
@@ -8,7 +8,7 @@ import {CustomCardComponent} from './money-track-overview/custom-card/custom-car
 import {FormsModule} from '@angular/forms';
 import {AddTransactionComponent} from './add-transaction/add-transaction.component';
 import {CustomTableComponent} from './money-track-overview/custom-table/custom-table.component';
-import {SharedModule} from "../shared/shared/shared.module";
+import {SharedModule} from "../shared/shared.module";
 import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
@@ -27,7 +27,9 @@ import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
     SharedModule,
     NgbTooltip,
   ],
-  providers: []
+  providers: [
+    DatePipe
+  ]
 })
 export class HomeModule {
 }

@@ -2,6 +2,7 @@
   <div class="row cards-container">
     <app-custom-card name="Balance"
                      [content]="balance"
+                     (click)="onUpdateBalance(updateBalance)"
                      icon="assets/icons/wallet.png"
                      class="balance-card col-3"></app-custom-card>
     <app-custom-card name="Income"
@@ -80,8 +81,16 @@
       <option value="period">Period</option>
     </select>
     <div class="d-flex mt-2" *ngIf="isShowPeriod">
-      <input type="date" class="form-control" name="dateStart" [(ngModel)]="dateStartPeriod" style="margin-right:5px">
-      <input type="date" class="form-control" name="dateEnd" [(ngModel)]="dateEndPeriod" style="margin-left:5px">
+      <input type="date"
+             class="form-control"
+             name="dateStart"
+             [(ngModel)]="dateStartPeriod"
+             style="margin-right:5px">
+      <input type="date"
+             class="form-control"
+             name="dateEnd"
+             [(ngModel)]="dateEndPeriod"
+             style="margin-left:5px">
     </div>
   </div>
   <div class="modal-footer">
@@ -93,6 +102,22 @@
     <h4 class="modal-title" id="modal-basic-title1">Add Transaction</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
   </div>
-  <app-add-transaction></app-add-transaction>
+  <app-add-transaction [profileId]="profileId" (onClose)="onCloseModal()"></app-add-transaction>
 
+</ng-template>
+
+<ng-template #updateBalance>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title2">Update balance</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="balance">Balance</label>
+      <input type="number" class="form-control customInput" id="balance" [(ngModel)]="balanceToUpdate">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="onUpdateBalanceSubmit()">Save</button>
+  </div>
 </ng-template>

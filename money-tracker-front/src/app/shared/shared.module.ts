@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoadingComponent} from "../loading/loading.component";
+import {LoadingComponent} from "./loading/loading.component";
+import { CustomModalComponent } from './custom-modal/custom-modal.component';
 
 
 @NgModule({
   declarations: [
-    LoadingComponent
+    LoadingComponent,
+    CustomModalComponent
   ],
   imports: [
     CommonModule

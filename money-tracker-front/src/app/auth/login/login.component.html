@@ -12,9 +12,10 @@
         <label for="password">Password</label>
         <input type="password" id="password" class="form-control mt-1 customInput" [(ngModel)]="authPostDto.password" />
       </div>
-      <div class="mt-4">
+      <div class="mt-4 mb-2">
         <button class="btn button" [class.disabled]="disabled" (click)="login()">Login</button>
       </div>
+      <a class="link" (click)="onGoToRegister()">Register?</a>
     </div>
   </div>
 </div>

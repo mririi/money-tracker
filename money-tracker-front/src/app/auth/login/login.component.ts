@@ -17,7 +17,7 @@ export class LoginComponent {
   _disabled: boolean = false;
   isLoading: boolean = false;
   get disabled() {
-    return this.authPostDto.email && this.authPostDto.password? this._disabled?? false: false;
+    return !this.authPostDto.email || !this.authPostDto.password || this._disabled;
   }
 
   set disabled(value: boolean) {
@@ -44,5 +44,9 @@ export class LoginComponent {
         this.isLoading = false;
       }
     });
+  }
+
+  onGoToRegister() {
+    this.router.navigate(['../register'], {relativeTo: this.route}).then();
   }
 }

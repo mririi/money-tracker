@@ -1,10 +1,7 @@
 @import 'bootstrap/dist/css/bootstrap';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
+@import 'bootstrap/scss/bootstrap';
+@import "assets/scss/global-custom.scss";
 
-:root {
-  --primary-color: #178768;
-  --secondary-color: #f2ce80;
-  --white: #e5ebe7;
-  --black: #121313;
-}
+
 

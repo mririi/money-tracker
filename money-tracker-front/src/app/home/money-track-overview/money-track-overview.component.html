@@ -1,13 +1,98 @@
-<div class="px-2 py-3">
-  <div class="row">
-    <app-custom-card header="Balance" [content]="balance" class="balance-card col-3"></app-custom-card>
-    <app-custom-card header="Revenu" [content]="revenuTotal" class="revenu-card col-3"></app-custom-card>
-    <app-custom-card header="Expense" [content]="expenseTotal" class="expense-card col-3"></app-custom-card>
-    <app-custom-card header="Savings" [content]="savingsTotal" class="savings-card col-3"></app-custom-card>
+<div class="py-3">
+  <div class="row cards-container">
+    <app-custom-card name="Balance"
+                     [content]="balance"
+                     icon="assets/icons/wallet.png"
+                     class="balance-card col-3"></app-custom-card>
+    <app-custom-card name="Income"
+                     [content]="revenuTotal"
+                     icon="assets/icons/income.png"
+                     class="revenu-card col-3"></app-custom-card>
+    <app-custom-card name="Expenses"
+                     [content]="expenseTotal"
+                     icon="assets/icons/expenses.png"
+                     class="expense-card col-3"></app-custom-card>
+    <app-custom-card name="Savings"
+                     [content]="savingsTotal"
+                     icon="assets/icons/piggy-bank.png"
+                     class="savings-card col-3"></app-custom-card>
   </div>
 </div>
-<div style="position:relative;display: flex;flex-direction: column">
-  <i class="fas fa-plus add-transaction-button btn" (click)="onOpenAddTransaction()"></i>
-  <app-custom-table style="margin-top: 70px" [transactions]="transactions"></app-custom-table>
+<div class="mt-4">
+  <app-custom-table [transactions]="filteredData"></app-custom-table>
+</div>
+<div class="float-buttons">
+  <div class="menu-container" *ngIf="showMenu">
+    <i class="fas fa-add menu-button add-button"
+       ngbTooltip="Add transaction"
+       container="body"
+       placement="left"
+       tooltipClass="custom-tooltip"
+       (click)="onOpenAddTransaction(addTransaction)"></i>
+    <i class="fas fa-filter menu-button filter-button"
+       ngbTooltip="Filter transactions"
+       container="body"
+       placement="left"
+       tooltipClass="custom-tooltip"
+       (click)="onFilterTransactions(filterComponent)"></i>
+    <i class="fas fa-arrow-circle-right menu-button logout-button"
+       ngbTooltip="Logout"
+       container="body"
+       placement="left"
+       tooltipClass="custom-tooltip"
+       (click)="onLogout()"></i>
+  </div>
+
+  <i class="fa-solid fa-pen pen-button fa-2x"
+     ngbTooltip="Open menu"
+     container="body"
+     placement="left"
+     tooltipClass="custom-tooltip"
+     *ngIf="!showMenu"
+     (click)="onToggleMenu()"></i>
+  <i class="fas fa-close close-button fa-2x"
+     ngbTooltip="Close menu"
+     container="body"
+     placement="left"
+     tooltipClass="custom-tooltip"
+     *ngIf="showMenu"
+     (click)="onToggleMenu()"></i>
 </div>
 
+<ng-template #filterComponent>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Filter</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
+  </div>
+  <div class="modal-body">
+    <select class="form-select" aria-label="Default select example" (change)="onChangeType($event)" [(ngModel)]="filterType">
+      <option value="all">All</option>
+      <option value="income">Income</option>
+      <option value="expense">Expense</option>
+      <option value="savings">Savings</option>
+      <option value="dateAsc">Date Asc</option>
+      <option value="dateDesc">Date Desc</option>
+      <option value="amountAsc">Amount Asc</option>
+      <option value="amountDesc">Amount Desc</option>
+      <option value="category">Category</option>
+      <option value="currentMonth">Current Month</option>
+      <option value="lastMonth">Last Month</option>
+      <option value="period">Period</option>
+    </select>
+    <div class="d-flex mt-2" *ngIf="isShowPeriod">
+      <input type="date" class="form-control" name="dateStart" [(ngModel)]="dateStartPeriod" style="margin-right:5px">
+      <input type="date" class="form-control" name="dateEnd" [(ngModel)]="dateEndPeriod" style="margin-left:5px">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="onFilterSubmit()">Save</button>
+  </div>
+</ng-template>
+<ng-template #addTransaction>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title1">Add Transaction</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
+  </div>
+  <app-add-transaction></app-add-transaction>
+
+</ng-template>

@@ -1,53 +1,22 @@
-.add-container {
-  display: block;
-  background-color: var(--secondary-color);
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
-.closeButton {
-  font-weight: bold;
-}
-
-.saveButton {
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  background: none;
-  margin-right: 10px;
-  font-weight: bold;
-}
-
-.saveButton:hover {
-  color: var(--white);
-  background-color: var(--primary-color);
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  border-bottom: 2px solid var(--primary-color);
-  margin-right: 20px;
-  margin-left: 20px;
-}
-
-.title {
-  font-weight: bold;
-  color: var(--primary-color);
-}
-
-.body {
-  padding: 20px;
-}
-
 .customInput {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border: 1px var(--secondary-color);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px var(--primary-color);
 }
 
 .form-control:focus {
-  box-shadow: 0 0 0 0.2rem rgba(242, 206, 128, 0.25);
+  box-shadow: 0 0 0 0.1rem rgb(23, 135, 104);
   border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+  }
+  .body {
+    padding: 10px;
+  }
+  .header {
+    padding: 10px 0 0;
+  }
 }

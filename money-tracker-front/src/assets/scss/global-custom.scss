@@ -1,0 +1,19 @@
+:root {
+  --primary-color: #178768;
+  --secondary-color: #e5ebe7;
+  --third-color: rgb(23, 135, 104,0.5);
+  --white: #e5ebe7;
+  --black: #121313;
+  --background: #F7F7F7;
+}
+
+.custom-tooltip .tooltip-inner {
+  max-width: 100%;
+  text-align: left;
+  border-radius: 10px;
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  backdrop-filter: saturate(180%) blur(15px);
+  padding: .5rem 1rem;
+  border: 1px solid var(--primary-color);
+}

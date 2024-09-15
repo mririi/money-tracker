@@ -15,6 +15,6 @@ public class TransactionPostDto {
     private String category;
     private TransactionTypeEnum type;
     private String date;
-    private String commentaire;
+    private String comment;
     private int profileId;
 }

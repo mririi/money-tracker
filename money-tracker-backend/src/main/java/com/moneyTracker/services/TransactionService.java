@@ -25,6 +25,7 @@ public class TransactionService {
                 .category(transactionPostDto.getCategory())
                 .type(transactionPostDto.getType())
                 .date(LocalDate.parse(transactionPostDto.getDate()))
+                .comment(transactionPostDto.getComment())
                 .profileEntity(profileEntity).build();
         return transactionJpaRepository.save(transactionEntity);
     }

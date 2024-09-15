@@ -5,5 +5,6 @@ export interface TransactionGetDto {
   category: string;
   amount: number;
   date: string;
+  comment: string;
   type: TransactionTypeEnum;
 }

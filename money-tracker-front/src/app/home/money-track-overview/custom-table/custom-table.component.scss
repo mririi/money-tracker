@@ -1,3 +1,8 @@
+.custom-table {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -26,7 +31,7 @@
   border: 1px solid var(--secondary-color);
   font-size: 16px;
   font-weight: 500;
-  color: var(--white);
+  color: var(--primary-color);
 }
 
 .line-item {
@@ -34,6 +39,34 @@
   text-align: center;
 }
 
+.type-savings,
+.type-income,
+.type-expense {
+  color: var(--secondary-color);
+  border-radius: 5px;
+  font-weight: bold;
+  padding:1px;
+  width: 100px;
+}
+
+.type-expense {
+  background: lightcoral;
+}
+
+.type-savings {
+  background: rgb(23, 135, 104,0.5);
+}
+
+.type-income {
+  background: var(--primary-color);
+}
+
+.type-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+}
 @media (max-width: 768px) {
   .header {
     font-size: 12px;
@@ -45,5 +78,9 @@
   .line-item {
     font-size: 12px;
     border-right: none;
+  }
+
+  .custom-table {
+    padding: 30px;
   }
 }

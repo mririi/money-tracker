@@ -7,6 +7,8 @@ import {ProfileService} from "../../core/services/profile.service";
 import {ProfileGetDto} from "../../core/dtos/profil/profileGetDto";
 import {ProfileTokenPostDto} from "../../core/dtos/profil/profileTokenPostDto";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
+import {TransactionTypeEnum} from "../../core/enums/transactionTypeEnum";
 
 @Component({
   selector: 'app-money-track-overview',
@@ -21,13 +23,23 @@ export class MoneyTrackOverviewComponent implements OnInit {
   transactions: TransactionGetDto[] = [];
   profileId: number = -1;
   savingsTotal: string = '0';
+  showMenu: boolean = false;
+  filterType: any;
+  filteredData: TransactionGetDto[] = [];
+  dateStartPeriod: string = '';
+  dateEndPeriod: string = ''
+  isShowPeriod: boolean = false;
 
   constructor(private readonly transactionApiService: TransactionApiService,
               private readonly router: Router,
               private readonly route: ActivatedRoute,
               public transactionService: TransactionService,
               private readonly profileApiService: ProfileApiService,
-              private readonly profileService:ProfileService) {
+              config: NgbModalConfig,
+              private modalService: NgbModal,
+              private readonly profileService: ProfileService) {
+    config.backdrop = 'static';
+    config.keyboard = false;
   }
 
   ngOnInit(): void {
@@ -46,6 +58,7 @@ export class MoneyTrackOverviewComponent implements OnInit {
     });
     this.transactionService.transactions.subscribe(transactions => {
       this.transactions = transactions;
+      this.filteredData = transactions;
     });
   }
 
@@ -57,21 +70,9 @@ export class MoneyTrackOverviewComponent implements OnInit {
       error: error => console.error("error" + error.message)
     });
   }
-  // getSeverity(type: TransactionTypeEnum) {
-  //   switch (type) {
-  //     case TransactionTypeEnum.INCOME:
-  //       return 'success';
-  //     case TransactionTypeEnum.EXPENSE:
-  //       return 'danger';
-  //     case TransactionTypeEnum.SAVINGS:
-  //       return 'warning';
-  //     default:
-  //       return;
-  //   }
-  // }
 
-  onOpenAddTransaction() {
-    this.router.navigate(['add-transaction'], {relativeTo: this.route});
+  onOpenAddTransaction(content: any) {
+    this.modalService.open(content);
   }
 
   private loadInfo() {
@@ -93,5 +94,63 @@ export class MoneyTrackOverviewComponent implements OnInit {
       },
       error: error => console.error("error" + error.message)
     });
+  }
+
+  onToggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
+
+  onLogout() {
+    localStorage.removeItem('access_token');
+    this.router.navigate(['login']).then();
+  }
+
+  onFilterTransactions(content: any) {
+    this.modalService.open(content);
+  }
+
+  onFilterSubmit() {
+    if (this.filterType === 'dateAsc') {
+      this.filteredData = this.transactions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    } else if (this.filterType === 'dateDesc') {
+      this.filteredData = this.transactions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    } else if (this.filterType === 'amountAsc') {
+      this.filteredData = this.transactions.sort((a, b) => a.amount - b.amount);
+    } else if (this.filterType === 'amountDesc') {
+      this.filteredData = this.transactions.sort((a, b) => b.amount - a.amount);
+    } else if (this.filterType === 'category') {
+      this.filteredData = this.transactions.sort((a, b) => a.category.localeCompare(b.category));
+    } else {
+      this.filteredData = this.transactions.filter(transaction => {
+        switch (this.filterType) {
+          case 'income':
+            return transaction.type === TransactionTypeEnum.INCOME;
+          case 'expense':
+            return transaction.type === TransactionTypeEnum.EXPENSE;
+          case 'savings':
+            return transaction.type === TransactionTypeEnum.SAVINGS;
+          case 'currentMonth':
+            return new Date(transaction.date).getMonth() === new Date().getMonth();
+          case 'lastMonth':
+            return new Date(transaction.date).getMonth() === new Date().getMonth() - 1;
+          case 'period':
+            return new Date(transaction.date) >= new Date(this.dateStartPeriod) && new Date(transaction.date) <= new Date(this.dateEndPeriod);
+          default:
+            return true;
+
+        }
+      });
+    }
+    this.onCloseModal();
+  }
+
+  onCloseModal() {
+    this.modalService.dismissAll();
+  }
+
+  onChangeType(event: any) {
+    if (event.target.value === 'period') {
+      this.isShowPeriod = true;
+    }
   }
 }

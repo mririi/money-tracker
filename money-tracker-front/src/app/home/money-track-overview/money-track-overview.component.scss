@@ -1,73 +1,107 @@
-.custom-table {
-  margin: 1rem 2rem;
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  margin-left: 15px;
+  width: 100%;
 }
 
-.balance-card .custom-card{
-  border: 2px solid var(--secondary-color);
-  color: var(--white);
+.float-buttons {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
-.balance-card .custom-card:hover{
+.menu-container {
+  display: flex;
+  flex-direction: column;
   background: var(--secondary-color);
-  color: #121313;
-  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
-.revenu-card .custom-card{
-  border: 2px solid lightgreen;
-  color: var(--white);
-}
-
-.revenu-card .custom-card:hover{
-  background: lightgreen;
-  color: var(--black);
-  cursor: pointer;
-}
-
-.expense-card .custom-card{
-  border: 2px solid lightcoral;
-  color: var(--white);
-}
-
-.expense-card .custom-card:hover{
-  background: lightcoral;
-  color: var(--black);
-  cursor: pointer;
-}
-
-.savings-card .custom-card{
-  border: 2px solid lightblue;
-  color: var(--white);
-}
-
-.savings-card .custom-card:hover{
-  background: lightblue;
-  color: var(--black);
-  cursor: pointer;
-}
-
-.add-transaction-button {
-  background: var(--primary-color);
-  width: 50px;
-  color: var(--secondary-color);
-  border: 1px solid var(--secondary-color);
-  font-size: 1.4rem;
-  font-weight: bold;
-  position: absolute;
-  right: 45px;
-}
-
-.add-transaction-button:hover {
-  background: var(--secondary-color);
+.pen-button {
   color: var(--primary-color);
+  border-radius: 10px;
   border: 1px solid var(--primary-color);
+  padding: 10px;
+}
+
+.pen-button:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.close-button {
+  color: lightcoral;
+  border-radius: 10px;
+  border: 1px solid lightcoral;
+  padding: 10px 15px;
+}
+
+
+.close-button:hover {
+  background: lightcoral;
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.menu-button {
+  font-size: 1.8rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+.logout-button {
+  color: lightcoral;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.logout-button:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.add-button {
+  color: var(--third-color);
+}
+
+.add-button:hover {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.filter-button {
+  color: var(--third-color);
+}
+
+.filter-button:hover {
+  color: var(--primary-color);
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
   .custom-table {
     margin: 0;
   }
-  .add-transaction-button {
-    font-size: 1rem;
+
+  .cards-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .float-buttons {
+    bottom: 15px;
+    right: 15px;
   }
 }

@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {TransactionGetDto} from "../../../core/dtos/transaction/transactionGetDto";
+import {TransactionTypeEnum} from "../../../core/enums/transactionTypeEnum";
 
 @Component({
   selector: 'app-custom-table',
@@ -8,4 +9,8 @@ import {TransactionGetDto} from "../../../core/dtos/transaction/transactionGetDt
 })
 export class CustomTableComponent {
   @Input() transactions: TransactionGetDto[] = [];
+
+  getTypeColorClass(type: TransactionTypeEnum) {
+    return 'type-' + type.toLowerCase();
+  }
 }

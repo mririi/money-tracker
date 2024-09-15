@@ -1,9 +1,16 @@
 <div class="custom-card">
-    <p class="mt-1 mb-4 header">
-      {{header}}
+  <div class="left">
+    <img [src]="icon" alt="icon" class="icon" />
+  </div>
+  <div class="right">
+    <div class="d-flex justify-content-center">
+      <p class="m-0 content">
+        {{ content }}
+      </p>
+      <p class="currency">TND</p>
+    </div>
+    <p class="m-0 name">
+      {{ name }}
     </p>
-  <p class="m-0 content">
-      {{content}}
-  </p>
-  <p class="currency">Tunisian Dinar</p>
+  </div>
 </div>

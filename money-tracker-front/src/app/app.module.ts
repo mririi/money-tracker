@@ -1,17 +1,19 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {HomeModule} from "./home/home.module";
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from "./app-routing.module";
+import {AppComponent} from "./app.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HomeModule} from "./home/home.module";
 import {HttpClientModule} from "@angular/common/http";
+import {AuthModule} from "./auth/auth.module";
 import {ProfileApiService} from "./core/apis/profile.api.service";
 import {TransactionApiService} from "./core/apis/transaction.api.service";
 import {TransactionService} from "./core/services/transaction.service";
 import {ProfileService} from "./core/services/profile.service";
-import {AuthModule} from "./auth/auth.module";
-import {AuthService} from "./core/services/auth.service";
+import { IonicModule } from '@ionic/angular';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+;
 
 @NgModule({
   declarations: [
@@ -21,17 +23,20 @@ import {AuthService} from "./core/services/auth.service";
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AuthModule,
     HomeModule,
     HttpClientModule,
+    AuthModule,
+    IonicModule,
+    NgbModule
   ],
   providers: [
     ProfileApiService,
     TransactionApiService,
     TransactionService,
     ProfileService,
-    AuthService,
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

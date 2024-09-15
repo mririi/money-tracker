@@ -7,7 +7,8 @@ import {Component, Input, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class CustomCardComponent {
-  @Input() header: string = "No Header";
+  @Input() name: string = "No Name";
   @Input() content: string = "No Content";
+  @Input() icon: string = '';
 
 }

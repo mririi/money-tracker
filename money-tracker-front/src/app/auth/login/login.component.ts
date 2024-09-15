@@ -14,8 +14,14 @@ export class LoginComponent {
     email: '',
     password: ''
   };
+  _disabled: boolean = false;
+  isLoading: boolean = false;
   get disabled() {
-    return !this.authPostDto.email || !this.authPostDto.password;
+    return this.authPostDto.email && this.authPostDto.password? this._disabled?? false: false;
+  }
+
+  set disabled(value: boolean) {
+    this._disabled = value;
   }
 
   constructor(private readonly authApiService: AuthApiService,
@@ -24,13 +30,18 @@ export class LoginComponent {
   }
 
   login() {
+    this.disabled = true;
+    this.isLoading = true;
     this.authApiService.authenticate(this.authPostDto).subscribe({
       next: (tokens: AuthGetDto) => {
         localStorage.setItem('access_token', tokens.access_token);
         this.router.navigate(['../home'], {relativeTo: this.route});
+        this.disabled = false;
+        this.isLoading = false;
       },
-      error: error => {
-        console.error(error);
+      error: () => {
+        this.disabled = false;
+        this.isLoading = false;
       }
     });
   }

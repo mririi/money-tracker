@@ -20,7 +20,7 @@
   </div>
 </div>
 <div class="mt-4">
-  <app-custom-table [transactions]="filteredData"></app-custom-table>
+  <app-custom-table [transactions]="filteredData" (reloadTransactions)="loadProfile()"></app-custom-table>
 </div>
 <div class="float-buttons">
   <div class="menu-container" *ngIf="showMenu">
@@ -36,12 +36,6 @@
        placement="left"
        tooltipClass="custom-tooltip"
        (click)="onFilterTransactions(filterComponent)"></i>
-    <i class="fas fa-arrow-circle-right menu-button logout-button"
-       ngbTooltip="Logout"
-       container="body"
-       placement="left"
-       tooltipClass="custom-tooltip"
-       (click)="onLogout()"></i>
   </div>
 
   <i class="fa-solid fa-pen pen-button fa-2x"
@@ -102,7 +96,7 @@
     <h4 class="modal-title" id="modal-basic-title1">Add Transaction</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
   </div>
-  <app-add-transaction [profileId]="profileId" (onClose)="onCloseModal()"></app-add-transaction>
+  <app-add-transaction [profileId]="profileId" (onClose)="onUpdateTransactions()"></app-add-transaction>
 
 </ng-template>
 

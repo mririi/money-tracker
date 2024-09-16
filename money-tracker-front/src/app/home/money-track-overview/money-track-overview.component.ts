@@ -6,10 +6,8 @@ import {TransactionService} from "../../core/services/transaction.service";
 import {ProfileService} from "../../core/services/profile.service";
 import {ProfileGetDto} from "../../core/dtos/profil/profileGetDto";
 import {ProfileTokenPostDto} from "../../core/dtos/profil/profileTokenPostDto";
-import {Router} from "@angular/router";
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import {TransactionTypeEnum} from "../../core/enums/transactionTypeEnum";
-import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-money-track-overview',
@@ -25,7 +23,7 @@ export class MoneyTrackOverviewComponent implements OnInit {
   profileId: number = -1;
   savingsTotal: string = '0';
   showMenu: boolean = false;
-  filterType: any;
+  filterType: string = 'all';
   filteredData: TransactionGetDto[] = [];
   dateStartPeriod: string = '';
   dateEndPeriod: string = ''
@@ -33,7 +31,6 @@ export class MoneyTrackOverviewComponent implements OnInit {
   balanceToUpdate: number = 0;
 
   constructor(private readonly transactionApiService: TransactionApiService,
-              private readonly router: Router,
               public transactionService: TransactionService,
               private readonly profileApiService: ProfileApiService,
               config: NgbModalConfig,
@@ -66,6 +63,7 @@ export class MoneyTrackOverviewComponent implements OnInit {
       error: error => console.error("error" + error.message)
     });
   }
+
   loadTransactions() {
     this.transactionApiService.getTransactions(this.profileId).subscribe({
       next: transactions => {
@@ -102,11 +100,6 @@ export class MoneyTrackOverviewComponent implements OnInit {
 
   onToggleMenu() {
     this.showMenu = !this.showMenu;
-  }
-
-  onLogout() {
-    localStorage.removeItem('access_token');
-    this.router.navigate(['login']).then();
   }
 
   onFilterTransactions(content: any) {
@@ -168,5 +161,10 @@ export class MoneyTrackOverviewComponent implements OnInit {
       },
       error: error => console.error("error" + error.message)
     });
+  }
+
+  onUpdateTransactions() {
+    this.loadProfile();
+    this.onCloseModal();
   }
 }

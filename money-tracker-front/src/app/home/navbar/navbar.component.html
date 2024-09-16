@@ -1,1 +1,40 @@
-<!--<p-menubar [model]="items"></p-menubar>-->
+<div class="navbar-container">
+  <span class="title">Money Tracker</span>
+  <div class="user-container">
+    <span class="user-name">Welcome, {{ userName }}</span>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item" ngbDropdown>
+        <span ngbDropdownToggle class="d-flex justify-content-center align-items-center" style="color: white">
+        <i tabindex="0" class="nav-link fas fa-user-circle user-icon"></i>
+        </span>
+        <div ngbDropdownMenu class="dropdown-menu">
+          <a ngbDropdownItem (click)="onUpdateProfile(content)">Update Profile</a>
+          <a ngbDropdownItem (click)="onLogout()">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<ng-template #content>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Filter</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mt-2">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" class="form-control mt-1 customInput" [(ngModel)]="userDto.firstname" />
+    </div>
+    <div class="mt-2">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" class="form-control mt-1 customInput" [(ngModel)]="userDto.lastname" />
+    </div>
+    <div class="mt-2">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control mt-1 customInput" [(ngModel)]="userDto.email" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="onUpdate()">Save</button>
+  </div>
+</ng-template>

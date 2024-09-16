@@ -7,10 +7,12 @@ import {RegisterPostDto} from "../../core/dtos/auth/registerPostDto";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['../auth.component.scss','./register.component.scss']
 })
 export class RegisterComponent {
   authPostDto: RegisterPostDto = {
+    firstname: '',
+    lastname: '',
     email: '',
     password: ''
   };

@@ -1,5 +1,6 @@
 package com.moneyTracker.controllers;
 
+import com.moneyTracker.dtos.ProfilePatchDto;
 import com.moneyTracker.dtos.ProfileTokenPostDto;
 import com.moneyTracker.entities.ProfileEntity;
 import com.moneyTracker.services.ProfileService;
@@ -16,6 +17,11 @@ public class ProfileController {
     @PostMapping("/profile")
     public ProfileEntity getProfileByUserToken(@RequestBody final ProfileTokenPostDto profileTokenPostDto) {
         return profileService.getProfileByUserToken(profileTokenPostDto);
+    }
+
+    @PatchMapping("/{id}")
+    public void getProfileByUserToken(@RequestBody final ProfilePatchDto patchDto, @PathVariable("id") final int profileId) {
+        profileService.updateProfile(patchDto, profileId);
     }
 
     @PutMapping("/{id}/balance")

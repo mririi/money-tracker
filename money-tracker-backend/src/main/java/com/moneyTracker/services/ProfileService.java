@@ -1,5 +1,6 @@
 package com.moneyTracker.services;
 
+import com.moneyTracker.dtos.ProfilePatchDto;
 import com.moneyTracker.dtos.ProfileTokenPostDto;
 import com.moneyTracker.entities.ProfileEntity;
 import com.moneyTracker.repositories.ProfileJpaRepository;
@@ -38,6 +39,9 @@ public class ProfileService {
         User u = user.get();
         ProfileEntity profile = ProfileEntity.builder()
                 .balance(0.0)
+                .email(u.getEmail())
+                .firstName(u.getFirstname())
+                .lastName(u.getLastname())
                 .user(u)
                 .build();
         profileJpaRepository.save(profile);
@@ -55,5 +59,17 @@ public class ProfileService {
 
     public void deleteProfil(int id) {
         profileJpaRepository.deleteById(id);
+    }
+
+    public void updateProfile(ProfilePatchDto patchDto, int profileId) {
+        Optional<ProfileEntity> p = profileJpaRepository.findById(profileId);
+        if(p.isEmpty()) {
+            return;
+        }
+        ProfileEntity profile = p.get();
+        profile.setEmail(patchDto.getEmail());
+        profile.setFirstName(patchDto.getFirstname());
+        profile.setLastName(patchDto.getLastname());
+        profileJpaRepository.save(profile);
     }
 }

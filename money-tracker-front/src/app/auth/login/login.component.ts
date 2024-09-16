@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../auth.component.scss','./login.component.scss']
 })
 export class LoginComponent {
   authPostDto: AuthPostDto = {

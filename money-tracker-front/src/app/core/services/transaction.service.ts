@@ -11,4 +11,8 @@ export class TransactionService {
     const currentValue: TransactionGetDto[] = this._transactions.value;
     this._transactions.next([...currentValue, transaction]);
   }
+
+  setTransactions(transactions: TransactionGetDto[]) {
+    this._transactions.next(transactions);
+  }
 }

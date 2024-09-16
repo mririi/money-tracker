@@ -28,8 +28,7 @@ export class AddTransactionComponent {
   ];
   isLoading: boolean = false;
 
-  constructor(private readonly transactionApiService: TransactionApiService,
-              private transactionService: TransactionService) {
+  constructor(private readonly transactionApiService: TransactionApiService) {
   }
 
   onSave() {
@@ -46,8 +45,7 @@ export class AddTransactionComponent {
     }
     this.isLoading = true;
     this.transactionApiService.addTransaction(postTransaction).subscribe({
-      next: (transaction: TransactionGetDto) => {
-        this.transactionService.addTransaction(transaction);
+      next: () => {
         this.isLoading = false;
         this.onClose.emit();
       },

@@ -10,10 +10,7 @@ import {ProfileApiService} from "./core/apis/profile.api.service";
 import {TransactionApiService} from "./core/apis/transaction.api.service";
 import {TransactionService} from "./core/services/transaction.service";
 import {ProfileService} from "./core/services/profile.service";
-import { IonicModule } from '@ionic/angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-;
 
 @NgModule({
   declarations: [
@@ -26,7 +23,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeModule,
     HttpClientModule,
     AuthModule,
-    IonicModule,
     NgbModule
   ],
   providers: [

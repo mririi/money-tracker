@@ -1,5 +1,6 @@
 package com.moneyTracker.controllers;
 
+import com.moneyTracker.dtos.TransactionPatchDto;
 import com.moneyTracker.dtos.TransactionPostDto;
 import com.moneyTracker.entities.TransactionEntity;
 import com.moneyTracker.enums.TransactionTypeEnum;
@@ -23,6 +24,12 @@ public class TransactionController {
     @PostMapping
     public TransactionEntity createTransaction(@RequestBody TransactionPostDto transactionPostDto) {
         return transactionService.createTransaction(transactionPostDto);
+    }
+
+    @PatchMapping("/{id}")
+    public TransactionEntity updateTransaction(@PathVariable("id") final long id,
+                                               @RequestBody TransactionPatchDto transactionPatchDto) {
+        return transactionService.updateTransaction(id, transactionPatchDto);
     }
 
     @GetMapping("/profile/{id}/total-amount")

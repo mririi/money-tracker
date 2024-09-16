@@ -5,6 +5,14 @@
       <h2>Register to</h2>
       <h1>Money Tracker</h1>
       <div class="mt-4">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" class="form-control mt-1 customInput" [(ngModel)]="authPostDto.firstname" />
+      </div>
+      <div class="mt-2">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" class="form-control mt-1 customInput" [(ngModel)]="authPostDto.lastname" />
+      </div>
+      <div class="mt-2">
         <label for="email">Email</label>
         <input type="email" id="email" class="form-control mt-1 customInput" [(ngModel)]="authPostDto.email" />
       </div>

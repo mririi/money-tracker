@@ -21,6 +21,9 @@ public class ProfileEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Double balance;
+    private String email;
+    private String firstName;
+    private String lastName;
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnore

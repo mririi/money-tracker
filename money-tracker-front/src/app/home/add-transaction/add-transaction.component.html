@@ -12,12 +12,7 @@
     <input type="date" class="form-control customInput" id="date" [(ngModel)]="transaction.date">
   </div>
   <div class="form-group">
-    <label for="transactionType">Transaction Type</label>
-    <select class="form-control customInput" id="transactionType" [(ngModel)]="transaction.type">
-      <ng-container *ngFor="let type of transactionTypes">
-        <option [value]="type.name">{{ type.name }}</option>
-      </ng-container>
-    </select>
+    <app-select-transaction-type [(ngModel)]="transaction.type"></app-select-transaction-type>
   </div>
   <div class="form-group">
     <label for="comment">Comment</label>

@@ -1,0 +1,6 @@
+<label for="transactionType" *ngIf="withLabel">Transaction Type</label>
+<select class="form-control customInput" id="transactionType" [(ngModel)]="type" (change)="onChange($event)">
+  <ng-container *ngFor="let type of transactionTypes">
+    <option [value]="type">{{ type | transactionTypeEnumToText }}</option>
+  </ng-container>
+</select>

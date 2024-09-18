@@ -4,23 +4,24 @@
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    border: 1px solid var(--secondary-color);
-    background: var(--secondary-color);
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  border: 1px solid var(--secondary-color);
+  background: var(--secondary-color);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
 }
 
 .header-item {
-  border-right: 2px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
   text-align: center;
-
+  height: 100%;
+  padding-top: 10px;
 }
 
 .line {
@@ -37,6 +38,7 @@
 .line-item {
   border-right: 2px solid var(--secondary-color);
   text-align: center;
+  height: 100%;
 }
 
 .type-savings,
@@ -45,8 +47,8 @@
   color: var(--secondary-color);
   border-radius: 5px;
   font-weight: bold;
-  padding:1px;
   width: 100px;
+  height: 25px;
 }
 
 .type-expense {
@@ -54,7 +56,7 @@
 }
 
 .type-savings {
-  background: rgb(23, 135, 104,0.5);
+  background: rgb(23, 135, 104, 0.5);
 }
 
 .type-income {
@@ -65,7 +67,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 10px;
+  padding-top: 10px;
 }
 
 .custom-input {
@@ -81,6 +83,7 @@
   cursor: pointer;
   font-size: 20px;
 }
+
 @media (max-width: 768px) {
   .header {
     font-size: 12px;
@@ -88,10 +91,10 @@
 
   .line {
     font-size: 12px;
+    height: 40px;
   }
   .line-item {
     font-size: 12px;
-    border-right: none;
   }
 
   .custom-table {
@@ -101,6 +104,13 @@
 
   .type-container {
     font-size: 10px;
-    padding:5px;
+    padding: 5px;
+  }
+
+  .type-savings,
+  .type-income,
+  .type-expense {
+    height: 18px;
+    margin-top: 5px;
   }
 }

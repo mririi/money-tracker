@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-between;
   background-color: var(--third-color);
+  align-items: center;
   padding: 5px 10px;
 }
 
@@ -29,3 +30,21 @@
   font-size: 26px;
 }
 
+@media (max-width: 768px) {
+  .title {
+    font-size: 0.8rem;
+  }
+
+  .user-container {
+    width: 200px;
+  }
+
+  .user-name {
+    font-size: 0.8rem;
+    width: 200px;
+  }
+
+  .user-icon {
+    font-size: 1rem;
+  }
+}

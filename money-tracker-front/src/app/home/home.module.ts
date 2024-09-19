@@ -11,7 +11,7 @@ import {CustomTableComponent} from './money-track-overview/custom-table/custom-t
 import {SharedModule} from "../shared/shared.module";
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import { SelectTransactionTypeComponent } from './add-transaction/select-transaction-type/select-transaction-type.component';
-import {TransactionTypeEnumToTextPipe} from "../core/pipes/TransactionTypeEnumToText";
+import {TransactionTypeEnumToTextPipe} from "../core/pipes/TransactionTypeEnumToText.pipe";
 
 @NgModule({
   declarations: [

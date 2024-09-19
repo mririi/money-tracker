@@ -19,7 +19,7 @@
                      class="savings-card col-3"></app-custom-card>
   </div>
 </div>
-<div class="mt-4">
+<div class="mt-1">
   <app-custom-table [transactions]="filteredData" (reloadTransactions)="loadProfile()"></app-custom-table>
 </div>
 <div class="float-buttons">
@@ -55,11 +55,7 @@
 </div>
 
 <ng-template #filterComponent>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Filter</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
-  </div>
-  <div class="modal-body">
+  <app-custom-modal title="Filter" (submit)="onFilterSubmit()" button="Filter">
     <select class="form-select" aria-label="Default select example" (change)="onChangeType($event)" [(ngModel)]="filterType">
       <option value="all">All</option>
       <option value="income">Income</option>
@@ -86,32 +82,17 @@
              [(ngModel)]="dateEndPeriod"
              style="margin-left:5px">
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="onFilterSubmit()">Save</button>
-  </div>
+  </app-custom-modal>
 </ng-template>
 <ng-template #addTransaction>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title1">Add Transaction</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
-  </div>
-  <app-add-transaction [profileId]="profileId" (onClose)="onUpdateTransactions()"></app-add-transaction>
-
+  <app-add-transaction (updateProfile)="loadProfile()"></app-add-transaction>
 </ng-template>
 
 <ng-template #updateBalance>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title2">Update balance</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
-  </div>
-  <div class="modal-body">
+  <app-custom-modal title="Update balance" (submit)="onUpdateBalanceSubmit()">
     <div class="form-group">
       <label for="balance">Balance</label>
       <input type="number" class="form-control customInput" id="balance" [(ngModel)]="balanceToUpdate">
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="onUpdateBalanceSubmit()">Save</button>
-  </div>
+  </app-custom-modal>
 </ng-template>

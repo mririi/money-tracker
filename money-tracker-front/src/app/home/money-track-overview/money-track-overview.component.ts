@@ -7,7 +7,7 @@ import {ProfileService} from "../../core/services/profile.service";
 import {ProfileGetDto} from "../../core/dtos/profil/profileGetDto";
 import {ProfileTokenPostDto} from "../../core/dtos/profil/profileTokenPostDto";
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
-import {TransactionTypeEnum} from "../../core/enums/transactionTypeEnum";
+import {TransactionTypeEnum} from "../../core/enums/transactionType.enum";
 
 @Component({
   selector: 'app-money-track-overview',
@@ -161,10 +161,5 @@ export class MoneyTrackOverviewComponent implements OnInit {
       },
       error: error => console.error("error" + error.message)
     });
-  }
-
-  onUpdateTransactions() {
-    this.loadProfile();
-    this.onCloseModal();
   }
 }

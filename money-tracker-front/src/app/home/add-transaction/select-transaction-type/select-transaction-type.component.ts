@@ -1,5 +1,5 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import {TransactionTypeEnum} from "../../../core/enums/transactionTypeEnum";
+import {TransactionTypeEnum} from "../../../core/enums/transactionType.enum";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({

@@ -1,4 +1,4 @@
-import {TransactionTypeEnum} from "../../enums/transactionTypeEnum";
+import {TransactionTypeEnum} from "../../enums/transactionType.enum";
 
 export interface TransactionPostDto {
     category: string;

@@ -1,7 +1,6 @@
 <div class="pb-5 custom-table">
   <ng-template #tooltipInfo>
-      <p>* Click on a transaction to update it</p>
-      <p class="mb-0">* Double click on a transaction to delete it</p>
+      <p class="mb-0">* Click on a transaction to update it</p>
   </ng-template>
   <i class="fas fa-info-circle mr-5 mb-2 info-icon" [ngbTooltip]="tooltipInfo" container="body" placement="right" tooltipClass="custom-tooltip"></i>
   <div class="row header">
@@ -40,11 +39,7 @@
       </div>
     </div>
     <ng-template #updateContent>
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title3">Edit transaction</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
-      </div>
-      <div class="modal-body">
+      <app-custom-modal title="Update transaction" (submit)="onUpdateTransaction(transaction.id)">
         <div class="form-group">
           <label for="category">Category</label>
           <input type="text" class="form-control customInput" id="category" [(ngModel)]="transactionUpdate.category">
@@ -64,11 +59,7 @@
           <label for="comment">Comment</label>
           <textarea class="form-control customInput" id="comment" name="comment" [(ngModel)]="transactionUpdate.comment"></textarea>
         </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" (click)="onDeleteTransaction(content)">Delete</button>
-        <button type="button" class="btn btn-outline-secondary" (click)="onUpdateTransaction(transaction.id)">Save</button>
-      </div>
-      </div>
+      </app-custom-modal>
     </ng-template>
     <ng-template #content>
       <div class="modal-header">

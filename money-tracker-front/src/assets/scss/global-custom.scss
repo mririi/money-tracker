@@ -1,19 +1,114 @@
-:root {
+
+
+html,
+body {
+  font-family: "Space Mono", monospace;
+  margin: 0;
+  padding: 0;
+}
+@mixin lighten() {
   --primary-color: #178768;
   --secondary-color: #e5ebe7;
   --third-color: rgb(23, 135, 104,0.5);
   --white: #e5ebe7;
-  --black: #121313;
+  --text-color: #121313;
   --background: #F7F7F7;
+  --tooltip-background: rgb(23, 135, 104, 0.1);
+}
+
+@mixin darken() {
+  --primary-color: #1ABC9C;       /* A brighter teal for dark backgrounds */
+  --secondary-color: #4B4F52;     /* A soft, dark grey for contrast */
+  --third-color: rgba(26, 188, 156, 0.5); /* Adjusted transparency for the dark theme */
+  --white: #D9E0E4;               /* Off-white for softer contrast */
+  --text-color: #F7F7F7;               /* Light grey to replace black text in dark mode */
+  --background: #181A1B;          /* Dark background for the dark mode */
+  --tooltip-background: rgb(23, 135, 104, 0.1);
+}
+
+body.DARK {
+  @include darken();
+}
+body.LIGHT {
+  @include lighten();
 }
 
 .custom-tooltip .tooltip-inner {
   max-width: 100%;
   text-align: left;
   border-radius: 10px;
-  background: var(--secondary-color);
+  background: var(--tooltip-background);
   color: var(--primary-color);
+  font-weight: bold;
   backdrop-filter: saturate(180%) blur(15px);
   padding: .5rem 1rem;
   border: 1px solid var(--primary-color);
+}
+
+.modal-content {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: 10px;
+  border: 1px solid var(--primary-color);
+}
+
+.form-select {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: 1px solid var(--primary-color);
+}
+.modal-content .form-control {
+  background-color: var(--third-color);
+  color: var(--text-color);
+  border: 1px var(--primary-color);
+}
+.form-select:focus,
+.modal-content .form-control:focus {
+  box-shadow: 0 0 0 0.1rem rgb(23, 135, 104);
+  border-color: var(--primary-color);
+}
+
+.custom-submit-button {
+  background: none;
+  color: var(--text-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.custom-submit-button:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.custom-close-icon {
+  display: block;
+  margin-left: auto;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--primary-color);
+}
+
+.dropdown-menu {
+  background: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+}
+
+.dropdown-item {
+  color: var(--primary-color);
+}
+
+.dropdown-item:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
 }

@@ -1,0 +1,7 @@
+environment:
+  name: prod
+spring:
+  datasource:
+    url: 
+    username:
+    password:

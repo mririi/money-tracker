@@ -57,17 +57,12 @@ public class ProfileService {
         profileJpaRepository.save(profile);
     }
 
-    public void deleteProfil(int id) {
-        profileJpaRepository.deleteById(id);
-    }
-
     public void updateProfile(ProfilePatchDto patchDto, int profileId) {
         Optional<ProfileEntity> p = profileJpaRepository.findById(profileId);
         if(p.isEmpty()) {
             return;
         }
         ProfileEntity profile = p.get();
-        profile.setEmail(patchDto.getEmail());
         profile.setFirstName(patchDto.getFirstname());
         profile.setLastName(patchDto.getLastname());
         profileJpaRepository.save(profile);

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 import {ProfileApiService} from "../../core/apis/profile.api.service";
 import {ProfileService} from "../../core/services/profile.service";
@@ -9,10 +9,11 @@ import {ProfilePatchDto} from "../../core/dtos/profil/profilePatchDto";
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
-  userName: string = 'John';
+  userName: string = '';
   profile: ProfileGetDto = {} as ProfileGetDto;
   userDto: ProfilePatchDto = {} as ProfilePatchDto;
 
@@ -30,7 +31,9 @@ export class NavbarComponent implements OnInit {
     this.profileService.profile.subscribe({
       next: (profile: ProfileGetDto) => {
         this.profile = profile;
-        this.userName = profile.firstName + ' ' + profile.lastName;
+        if (!!profile.firstName && !!profile.lastName) {
+          this.userName = profile.firstName + ' ' + profile.lastName;
+        }
       }
     });
   }
@@ -43,7 +46,6 @@ export class NavbarComponent implements OnInit {
   onUpdateProfile(content: any) {
     this.modalService.open(content)
     this.userDto = {
-      email: this.profile.email,
       firstname: this.profile.firstName,
       lastname: this.profile.lastName
     };

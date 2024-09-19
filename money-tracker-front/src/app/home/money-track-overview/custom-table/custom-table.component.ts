@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TransactionGetDto} from "../../../core/dtos/transaction/transactionGetDto";
-import {TransactionTypeEnum} from "../../../core/enums/transactionTypeEnum";
+import {TransactionTypeEnum} from "../../../core/enums/transactionType.enum";
 import {TransactionApiService} from "../../../core/apis/transaction.api.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TransactionPatchDto} from "../../../core/dtos/transaction/transactionPatchDto";

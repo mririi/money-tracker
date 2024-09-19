@@ -1,8 +1,7 @@
 spring:
+  profiles:
+    active: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/money-tracker
-    username: root
-    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

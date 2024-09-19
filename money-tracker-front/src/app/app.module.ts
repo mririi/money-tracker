@@ -11,6 +11,9 @@ import {TransactionApiService} from "./core/apis/transaction.api.service";
 import {TransactionService} from "./core/services/transaction.service";
 import {ProfileService} from "./core/services/profile.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ModeToggleService} from "./core/services/mode-toggle.service";
+import {MODE_STORAGE_SERVICE, ModeLocalStorageService} from "./core/services/mode-storage.service";
+import {DOCUMENT} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TransactionApiService,
     TransactionService,
     ProfileService,
+    ModeToggleService,
+    ModeLocalStorageService,
+    { provide: MODE_STORAGE_SERVICE, useClass: ModeLocalStorageService },
   ],
   exports: [],
   bootstrap: [AppComponent]

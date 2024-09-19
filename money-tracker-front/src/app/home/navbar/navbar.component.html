@@ -1,7 +1,8 @@
 <div class="navbar-container">
   <span class="title">Money Tracker</span>
   <div class="user-container">
-    <span class="user-name">Welcome, {{ userName }}</span>
+    <span class="user-name" *ngIf="!!userName">Welcome, {{ userName }}</span>
+    <app-mode-toggle class="toggle"></app-mode-toggle>
     <ul class="navbar-nav ms-auto">
       <li class="nav-item" ngbDropdown>
         <span ngbDropdownToggle class="d-flex justify-content-center align-items-center" style="color: white">
@@ -16,11 +17,7 @@
   </div>
 </div>
 <ng-template #content>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Update Profile</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
-  </div>
-  <div class="modal-body">
+  <app-custom-modal title="Update Profile" (submit)="onUpdate()">
     <div class="mt-2">
       <label for="firstName">First Name</label>
       <input type="text" id="firstName" class="form-control mt-1 customInput" [(ngModel)]="userDto.firstname" />
@@ -29,12 +26,5 @@
       <label for="lastName">Last Name</label>
       <input type="text" id="lastName" class="form-control mt-1 customInput" [(ngModel)]="userDto.lastname" />
     </div>
-    <div class="mt-2">
-      <label for="email">Email</label>
-      <input type="email" id="email" class="form-control mt-1 customInput" [(ngModel)]="userDto.email" />
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="onUpdate()">Save</button>
-  </div>
+  </app-custom-modal>
 </ng-template>

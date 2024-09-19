@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -7,7 +7,9 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./custom-modal.component.scss']
 })
 export class CustomModalComponent {
-  @Output() onSubmitChange: EventEmitter<void> = new EventEmitter<void>();
+  @Output() submit: EventEmitter<void> = new EventEmitter<void>();
+  @Input() title: string = '';
+  @Input() button: string = 'Save';
 
   constructor(private readonly modalService: NgbModal) {
   }
@@ -17,6 +19,6 @@ export class CustomModalComponent {
   }
 
   onSubmit() {
-    this.onSubmitChange.emit();
+    this.submit.emit();
   }
 }

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfilePatchDto {
-    private String email;
     private String firstname;
     private String lastname;
 }

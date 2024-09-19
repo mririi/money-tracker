@@ -1,0 +1,24 @@
+<app-custom-modal title="Update Profile" (submit)="onSubmit()">
+  <div class="mt-2">
+    <label for="firstName">First Name</label>
+    <input type="text"
+           id="firstName"
+           name="first Name"
+           #firstNameInput="ngModel"
+           required
+           class="form-control mt-1 customInput"
+           [(ngModel)]="userDto.firstname">
+    <app-control-error [reference]="firstNameInput"></app-control-error>
+  </div>
+  <div class="mt-2">
+    <label for="lastName">Last Name</label>
+    <input type="text"
+           id="lastName"
+           name="last Name"
+           #lastNameInput="ngModel"
+           class="form-control mt-1 customInput"
+           required
+           [(ngModel)]="userDto.lastname">
+    <app-control-error [reference]="lastNameInput"></app-control-error>
+  </div>
+</app-custom-modal>

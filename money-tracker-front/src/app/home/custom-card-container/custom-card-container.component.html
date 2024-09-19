@@ -1,0 +1,19 @@
+<div class="row cards-container">
+  <app-custom-card name="Balance"
+                   [content]="balance"
+                   (click)="onUpdateBalance()"
+                   icon="assets/icons/wallet.png"
+                   class="balance-card col-3"></app-custom-card>
+  <app-custom-card name="Income"
+                   [content]="revenuTotal"
+                   icon="assets/icons/income.png"
+                   class="revenu-card col-3"></app-custom-card>
+  <app-custom-card name="Expenses"
+                   [content]="expenseTotal"
+                   icon="assets/icons/expenses.png"
+                   class="expense-card col-3"></app-custom-card>
+  <app-custom-card name="Savings"
+                   [content]="savingsTotal"
+                   icon="assets/icons/piggy-bank.png"
+                   class="savings-card col-3"></app-custom-card>
+</div>

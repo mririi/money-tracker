@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Component, ContentChild, EventEmitter, Input, Output, TemplateRef} from '@angular/core';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-custom-modal',
@@ -10,15 +10,20 @@ export class CustomModalComponent {
   @Output() submit: EventEmitter<void> = new EventEmitter<void>();
   @Input() title: string = '';
   @Input() button: string = 'Save';
+  @ContentChild('customButtons', {static: true}) customButtons: TemplateRef<any> = {} as TemplateRef<any>;
 
-  constructor(private readonly modalService: NgbModal) {
+  constructor(public readonly modalService: NgbActiveModal) {
   }
 
-  close() {
-    this.modalService.dismissAll();
+  close(result: any): void {
+    this.modalService.close(result);
   }
 
-  onSubmit() {
+  onDismiss(): void {
+    this.modalService.dismiss();
+  }
+
+  onSubmit(): void {
     this.submit.emit();
   }
 }

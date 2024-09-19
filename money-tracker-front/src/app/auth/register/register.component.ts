@@ -1,15 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthApiService} from "../../core/apis/auth.api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthGetDto} from "../../core/dtos/auth/authGetDto";
 import {RegisterPostDto} from "../../core/dtos/auth/registerPostDto";
+import {ModeEnum} from "../../core/enums/mode.enum";
+import {ModeToggleService} from "../../core/services/mode-toggle.service";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['../auth.component.scss','./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   authPostDto: RegisterPostDto = {
     firstname: '',
     lastname: '',
@@ -19,10 +21,11 @@ export class RegisterComponent {
   _disabled: boolean = false;
   isLoading: boolean = false;
   passwordConfirmation: string = '';
+  imageUrl: string = 'assets/images/auth-light.png';
+  imageMobileUrl: string = 'assets/images/auth-light-mobile.png';
   get disabled() {
-    const s = (!this.authPostDto.email || !this.authPostDto.password || !this.passwordConfirmation ||
+    return (!this.authPostDto.email || !this.authPostDto.password || !this.passwordConfirmation ||
       this.authPostDto.password !== this.passwordConfirmation || this._disabled);
-    return s;
   }
 
   set disabled(value: boolean) {
@@ -30,8 +33,17 @@ export class RegisterComponent {
   }
 
   constructor(private readonly authApiService: AuthApiService,
+              private readonly modeToggleService: ModeToggleService,
               private readonly router: Router,
               private readonly route: ActivatedRoute,) {
+  }
+
+  ngOnInit(): void {
+    this.modeToggleService.modeChanged$.subscribe((mode: ModeEnum) => {
+      const isDark = mode === ModeEnum.DARK;
+      this.imageUrl = isDark ? 'assets/images/auth.png' : 'assets/images/auth-light.png';
+      this.imageMobileUrl = isDark ? 'assets/images/auth-dark-mobile.png' : 'assets/images/auth-light-mobile.png';
+    });
   }
 
   register() {

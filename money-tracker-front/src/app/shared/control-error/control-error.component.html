@@ -1,0 +1,11 @@
+<div class="custom-alert"
+  *ngIf="reference.invalid && (reference.dirty || reference.touched)"
+>
+  <span *ngIf="reference.errors?.['required']">{{ reference.name | titlecase }} is required.</span>
+  <span *ngIf="reference.errors?.['minlength']">
+    {{ reference.name | titlecase }} must be at least {{ reference.errors?.['minlength'].requiredLength }} characters long.
+  </span>
+  <span *ngIf="reference.errors?.['email']">
+    {{ reference.name | titlecase }} must be a valid email.
+  </span>
+</div>

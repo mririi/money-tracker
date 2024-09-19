@@ -1,0 +1,13 @@
+<app-custom-modal title="Update balance" (submit)="onSubmit()">
+  <div class="form-group">
+    <label for="balance">Balance</label>
+    <input type="number"
+           class="form-control customInput"
+           id="balance"
+           name="balance"
+           #balanceInput=ngModel
+           required
+           [(ngModel)]="balance">
+    <app-control-error [reference]="balanceInput"></app-control-error>
+  </div>
+</app-custom-modal>

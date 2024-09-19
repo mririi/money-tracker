@@ -1,0 +1,16 @@
+<div class="paginationContainer">
+  <ngb-pagination [boundaryLinks]="true"
+                  [collectionSize]="size"
+                  [pageSize]="pageSize"
+                  [ellipses]="true"
+                  [(page)]="currentPage"
+                  [rotate]="true"
+                  [maxSize]="maxSize"
+                  (pageChange)="goToPage($event)"
+                  [directionLinks]="true">
+    <ng-template ngbPaginationFirst><span class="fa fa-angle-double-left"></span></ng-template>
+    <ng-template ngbPaginationPrevious><span class="fa fa-angle-left"></span></ng-template>
+    <ng-template ngbPaginationLast><span class="fa fa-angle-double-right"></span></ng-template>
+    <ng-template ngbPaginationNext><span class="fa fa-angle-right"></span></ng-template>
+  </ngb-pagination>
+</div>

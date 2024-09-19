@@ -1,5 +1,3 @@
-
-
 html,
 body {
   font-family: "Space Mono", monospace;
@@ -14,6 +12,7 @@ body {
   --text-color: #121313;
   --background: #F7F7F7;
   --tooltip-background: rgb(23, 135, 104, 0.1);
+  --red: #C0392B;
 }
 
 @mixin darken() {
@@ -24,6 +23,7 @@ body {
   --text-color: #F7F7F7;               /* Light grey to replace black text in dark mode */
   --background: #181A1B;          /* Dark background for the dark mode */
   --tooltip-background: rgb(23, 135, 104, 0.1);
+  --red: #C0392B;
 }
 
 body.DARK {
@@ -57,6 +57,7 @@ body.LIGHT {
   color: var(--text-color);
   border: 1px solid var(--primary-color);
 }
+
 .modal-content .form-control {
   background-color: var(--third-color);
   color: var(--text-color);
@@ -111,4 +112,28 @@ body.LIGHT {
 .dropdown-item:hover {
   background: var(--primary-color);
   color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    font-size: 0.8rem;
+  }
+
+  .modal-header .modal-title {
+    font-size: 1rem;
+  }
+
+  .modal-content,
+  .modal-footer,
+  .modal-content .form-select,
+  .modal-content .form-control {
+    font-size: 0.8rem;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+
 }

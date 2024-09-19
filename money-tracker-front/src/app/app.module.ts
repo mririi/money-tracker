@@ -10,14 +10,13 @@ import {ProfileApiService} from "./core/apis/profile.api.service";
 import {TransactionApiService} from "./core/apis/transaction.api.service";
 import {TransactionService} from "./core/services/transaction.service";
 import {ProfileService} from "./core/services/profile.service";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ModeToggleService} from "./core/services/mode-toggle.service";
 import {MODE_STORAGE_SERVICE, ModeLocalStorageService} from "./core/services/mode-storage.service";
-import {DOCUMENT} from "@angular/common";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +34,7 @@ import {DOCUMENT} from "@angular/common";
     ProfileService,
     ModeToggleService,
     ModeLocalStorageService,
-    { provide: MODE_STORAGE_SERVICE, useClass: ModeLocalStorageService },
+    {provide: MODE_STORAGE_SERVICE, useClass: ModeLocalStorageService},
   ],
   exports: [],
   bootstrap: [AppComponent]

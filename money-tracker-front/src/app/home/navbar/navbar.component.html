@@ -1,5 +1,8 @@
 <div class="navbar-container">
-  <span class="title">Money Tracker</span>
+  <span>
+    <img [src]="imageUrl" style="width: 30px">
+
+  </span>
   <div class="user-container">
     <span class="user-name" *ngIf="!!userName">Welcome, {{ userName }}</span>
     <app-mode-toggle class="toggle"></app-mode-toggle>
@@ -9,22 +12,10 @@
         <i tabindex="0" class="nav-link fas fa-user-circle user-icon"></i>
         </span>
         <div ngbDropdownMenu class="dropdown-menu">
-          <a ngbDropdownItem (click)="onUpdateProfile(content)">Update Profile</a>
+          <a ngbDropdownItem (click)="onUpdateProfile()">Update Profile</a>
           <a ngbDropdownItem (click)="onLogout()">Logout</a>
         </div>
       </li>
     </ul>
   </div>
 </div>
-<ng-template #content>
-  <app-custom-modal title="Update Profile" (submit)="onUpdate()">
-    <div class="mt-2">
-      <label for="firstName">First Name</label>
-      <input type="text" id="firstName" class="form-control mt-1 customInput" [(ngModel)]="userDto.firstname" />
-    </div>
-    <div class="mt-2">
-      <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" class="form-control mt-1 customInput" [(ngModel)]="userDto.lastname" />
-    </div>
-  </app-custom-modal>
-</ng-template>

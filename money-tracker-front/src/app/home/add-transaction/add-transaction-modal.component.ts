@@ -1,18 +1,17 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {TransactionApiService} from "../../core/apis/transaction.api.service";
-import {TransactionService} from "../../core/services/transaction.service";
 import {TransactionGetDto} from "../../core/dtos/transaction/transactionGetDto";
 import {TransactionPostDto} from "../../core/dtos/transaction/transactionPostDto";
 import {TransactionTypeEnum} from "../../core/enums/transactionType.enum";
+import {AbstractCustomModalDirective} from "../../shared/custom-modal/abstract-custom-modal.directive";
 
 @Component({
-  selector: 'app-add-transaction',
-  templateUrl: './add-transaction.component.html',
-  styleUrls: ['./add-transaction.component.scss']
+  selector: 'app-add-transaction-modal',
+  templateUrl: './add-transaction-modal.component.html',
+  styleUrls: ['./add-transaction-modal.component.scss']
 })
-export class AddTransactionComponent {
-  @Input() profileId: number = -1;
-  @Output() updateProfile: EventEmitter<void> = new EventEmitter<void>();
+export class AddTransactionModalComponent extends AbstractCustomModalDirective {
+  profileId: number = -1;
   transaction: TransactionGetDto = {
     id: 0,
     amount: 0,
@@ -23,6 +22,7 @@ export class AddTransactionComponent {
   };
 
   constructor(private readonly transactionApiService: TransactionApiService) {
+    super();
   }
 
   onSave() {
@@ -39,7 +39,7 @@ export class AddTransactionComponent {
     }
     this.transactionApiService.addTransaction(postTransaction).subscribe({
       next: () => {
-        this.updateProfile.emit();
+        this.onResult();
       },
       error: () => {
       },

@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
-import {ProfileApiService} from "../../core/apis/profile.api.service";
 import {ProfileService} from "../../core/services/profile.service";
 import {ProfileGetDto} from "../../core/dtos/profil/profileGetDto";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ProfilePatchDto} from "../../core/dtos/profil/profilePatchDto";
+import {UpdateProfileModalComponent} from "../update-profile-modal/update-profile-modal.component";
+import {ModeEnum} from "../../core/enums/mode.enum";
+import { ModeToggleService } from 'src/app/core/services/mode-toggle.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,16 +16,20 @@ import {ProfilePatchDto} from "../../core/dtos/profil/profilePatchDto";
 export class NavbarComponent implements OnInit {
   userName: string = '';
   profile: ProfileGetDto = {} as ProfileGetDto;
-  userDto: ProfilePatchDto = {} as ProfilePatchDto;
+  imageUrl: string = 'assets/images/auth-light-mobile.png';
 
   constructor(private readonly router: Router,
               private readonly modalService: NgbModal,
-              private readonly profileApiService: ProfileApiService,
+              private readonly modeToggleService: ModeToggleService,
               private readonly profileService: ProfileService) {
   }
 
   ngOnInit() {
     this.loadProfile();
+    this.modeToggleService.modeChanged$.subscribe((mode: ModeEnum) => {
+      const isDark = mode === ModeEnum.DARK;
+      this.imageUrl = isDark ? 'assets/images/auth-dark-mobile.png' : 'assets/images/auth-light-mobile.png';
+    });
   }
 
   loadProfile() {
@@ -43,32 +48,12 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['login']).then();
   }
 
-  onUpdateProfile(content: any) {
-    this.modalService.open(content)
-    this.userDto = {
-      firstname: this.profile.firstName,
-      lastname: this.profile.lastName
-    };
-  }
-
-  onUpdate() {
-    this.profileApiService.updateProfile(this.userDto, this.profile.id).subscribe({
-      next: () => {
-        this.reloadProfile();
-        this.onCloseModal();
-      }
-    });
-  }
-
-  onCloseModal() {
-    this.modalService.dismissAll();
-  }
-
-  private reloadProfile() {
-    this.profileApiService.getProfileByToken({token: localStorage.getItem('access_token') || ''}).subscribe({
-      next: (profile: ProfileGetDto) => {
-        this.profileService.setProfile(profile);
-      }
+  onUpdateProfile() {
+    const popup = this.modalService.open(UpdateProfileModalComponent)
+    const modalRef = popup.componentInstance as UpdateProfileModalComponent;
+    modalRef.profile = {...this.profile};
+    popup.result.then(() => {
+      this.profileService.reload();
     });
   }
 }

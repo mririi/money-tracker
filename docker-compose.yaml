@@ -20,15 +20,6 @@ services:
     networks:
       - money-tracker-network
   
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: money-tracker-jenkins
-    restart: always
-    ports:
-      - "8080:8080"
-    networks:
-      - money-tracker-network
-
   # backend:
   #   build:
   #     context: ./money-tracker-back

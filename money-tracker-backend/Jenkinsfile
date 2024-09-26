@@ -2,59 +2,72 @@ pipeline {
     agent any
 
     environment {
-        // Docker image name
-        DOCKER_IMAGE = 'mririi/money-tracker-backend'
-        // DockerHub credentials ID stored in Jenkins
-        DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
-        DB_USER = ''
-        DB_PASSWORD = ''
+        DOCKER_IMAGE = 'mriri1/money-tracker-backend'.toLowerCase()
+        BUILD_TAG = "latest"
     }
 
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
                 // Clone the repository
-                git 'https://github.com/mririi/money-tracker.git'
-            }
-        }
-
-        stage('Build Maven Project') {
-            steps {
-                script {
-                    // Fetch credentials and set them as environment variables
-                    withCredentials([
-                        string(credentialsId: 'db-user', variable: 'DB_USER'),
-                        string(credentialsId: 'db-password', variable: 'DB_PASSWORD')
-                    ]) {
-                        // Run Maven build inside Docker container
-                        sh 'docker run --rm -v "$PWD/money-tracker-backend:/workspace" -v "$HOME/.m2:/root/.m2" maven:3.8.3-openjdk-17 mvn -f /workspace/pom.xml clean package -DskipTests -Pprod'
-                    }
-                }
+                git branch: 'master', url: 'https://github.com/mririi/money-tracker-backend.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                // Build the Docker image
-                sh 'docker build -t ${DOCKER_IMAGE}:latest ./money-tracker-backend'
+                script {
+                    try {
+                        // Build the Docker image and tag it with the build number
+                        sh "docker build -t ${DOCKER_IMAGE}:${BUILD_TAG} ."
+                    } catch (Exception e) {
+                        // Handle failure and mark the stage as failed
+                        currentBuild.result = 'FAILURE'
+                        error("Docker image build failed: ${e.message}")
+                    }
+                }
             }
         }
 
-        stage('Push to DockerHub') {
+        stage('Docker Login and Push') {
             steps {
-                // Push the Docker image to DockerHub
-                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
-                    sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS'
-                    sh 'docker push ${DOCKER_IMAGE}:latest'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
+                        try {
+                            // Log in to DockerHub
+                            sh "echo ${DOCKERHUB_PASS} | docker login -u ${DOCKERHUB_USER} --password-stdin"
+
+                            // Push the image with the unique build tag
+                            sh "docker push ${DOCKER_IMAGE}:${BUILD_TAG}"
+                            // Optionally push the 'latest' tag as well
+                            sh "docker tag ${DOCKER_IMAGE}:${BUILD_TAG} ${DOCKER_IMAGE}:latest"
+                            sh "docker push ${DOCKER_IMAGE}:latest"
+                        } catch (Exception e) {
+                            // Handle failure and mark the stage as failed
+                            currentBuild.result = 'FAILURE'
+                            error("Docker push failed: ${e.message}")
+                        } finally {
+                            // Always logout from Docker
+                            sh "docker logout"
+                        }
+                    }
                 }
             }
         }
     }
 
     post {
+        success {
+            echo 'Build and push successful!'
+        }
+        failure {
+            echo 'Build or push failed!'
+        }
         always {
-            // Clean up Docker images to save space on Jenkins
-            sh 'docker rmi ${DOCKER_IMAGE}:latest || true'
+            // Clean up dangling images
+            sh "docker image prune -f"
+            // Clean the workspace
+            cleanWs()
         }
     }
 }
